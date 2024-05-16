@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Header = ({ user }) => {
+const Header = () => {
   return (
     <>
          <header className="flex  p-4 justify-between bg-slate-100 " >
@@ -25,13 +25,13 @@ const Header = ({ user }) => {
           <div>Add guest</div>
           <div className="border-l border-grey-300 "></div>
 
-          <button className='bg-primary text-white p-2 rounded-full'> 
+          <button className='bg-slate-400 text-white p-2 rounded-full'> 
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
   <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
 </svg>
 </button>
           </div>
-          <Link className="flex border items-center border-gray-400 rounded-full gap-3 px-4 py-2 shadow-sm shadow-grey-50" to=''>
+          <Link className="flex border items-center border-gray-400 rounded-full gap-3 px-4 py-2 shadow-sm shadow-grey-50" to='/login'>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
   <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 </svg>
