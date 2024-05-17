@@ -2,6 +2,8 @@ const User = require("../models/userModel");
 const Token = require("../models/tokenModel");
 const sendEmail = require("../utils/setEmail");
 const crypto = require("crypto");
+const jwt=require('jsonwebtoken')
+const {expressjwt}=require('express-jwt')
 //to register user
 exports.postUser = async (req, res) => {
   let user = new User({
@@ -99,3 +101,95 @@ exports.postEmailConfirmation = (req, res) => {
   });
   };
   
+  //signin 
+exports.signIn=async(req,res)=>{
+    const {email,password}=req.body 
+
+    //check email is register/not
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res
+        .status(503)
+        .json({
+          error:
+            "sorry,the email you provided is not found in our system ,register first and try again" });
+    }
+
+    //if email found check password
+    
+    if(!user.authenticate(password)){
+      return res.status(400).json({ error: "email and password doesnot match" });
+    }  
+    //check if user is verified or not
+    if (!user.isVerified) {
+      return res.status(400).json({ error: "verify email first to continue" });
+    }
+    //generate token with user id and jwt secret
+    const token=jwt.sign({_id:user._id,role:user.role},process.env.JWT_SECRET)
+      //store token in the cookie
+      res.cookie("mycookie", token, { expire: Date.now()+ 99999 });
+       //return user information to frontend
+    const { _id, name, role } = user;
+    return res.json({ token, user: { name, role, email, _id } });
+    //to acess name--> .user.name
+    
+  }
+
+  ////signout
+exports.signOut=(req,res)=>{
+    res.clearCookie('mycookie')
+    res.json({message:'signout sucessfully'})
+  }
+
+
+  //require signin
+
+exports.requireSignin=expressjwt({
+    secret:process.env.Jwt_SECRET,
+    algorithms:['HS256'],
+    userProperty:'auth'
+  })
+
+  //middleware for user role
+exports.requireUser=(req,res,next)=>{
+    //verify jwt
+     expressjwt({
+      secret:process.env.Jwt_SECRET,
+    algorithms:['HS256'],
+    userProperty:'auth'
+     })(req,res,(err)=>{
+      if(err){
+        return res.status(400).json({error:'Unauthorized'})
+      }
+      //check the role
+      if(req.auth.role===0){
+        //grant access
+        next()
+      } else{
+        //unauthorize role
+        return res.status(403).json({error:'forbidden'})
+      }
+     })
+  }
+  
+  //middleware for admin role
+  exports.requireAdmin=(req,res,next)=>{
+    //verify jwt
+     expressjwt({
+      secret:process.env.Jwt_SECRET,
+    algorithms:['HS256'],
+    userProperty:'auth'
+     })(req,res,(err)=>{
+      if(err){
+        return res.status(400).json({error:'Unauthorized'})
+      }
+      //check the role
+      if(req.auth.role===1){
+        //grant access
+        next()
+      } else{
+        //unauthorize role
+        return res.status(403).json({error:'forbidden'})
+      }
+     })
+  }
