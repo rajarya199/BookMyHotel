@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import Homepage from './pages/Homepage';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import EmailVerify from './auth/EmailVerify';
 const MyRoute = () => {
   return (
     <Router>
@@ -12,6 +13,7 @@ const MyRoute = () => {
                 <Route index element={<Homepage/>}/>
                 <Route path='/login' element={<Login/>}/>
                 <Route path='/register' element={<Register/>}/>
+                <Route path='/email/confirmation/:token' element={<EmailVerify/>}/>
             </Route>
         </Routes>
     </Router>

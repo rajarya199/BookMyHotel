@@ -36,6 +36,7 @@ exports.postUser = async (req, res) => {
       }
 
       //send email process
+      const url=process.env.FRONTEND_URL+'\/email\/confirmation\/'+mytoken.token
       sendEmail({
         from: "no-reply@ecommerce.com",
         to: user.email,
@@ -44,7 +45,12 @@ exports.postUser = async (req, res) => {
                   http:\/\/${req.headers.host}\/api\/confirmation\/${mytoken.token}`,
 
         //http:localhost:8000/api/confirmation/3457777
-        
+        html:`
+        <h3> Hello User,</h3> <br/>
+        <h3> Thank for joining </h3> 
+        <h1> To finished Registration ,Verify Your Email Account</h1>
+        <button >  <a href=${url}> Click to verify </a> </button>
+        `
       });
       res.send(user);
     }
