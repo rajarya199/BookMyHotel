@@ -7,6 +7,7 @@ require('./db/connection')
 const bodyParser=require('body-parser')
 
 const userRoute=require('./routes/userRoute')
+const hotelRoute=require('./routes/hotelRoute')
 
 //middleware
 app.use(morgan('dev'))
@@ -19,3 +20,4 @@ app.listen( port, ()=>{
 
 //routes
 app.use('/api',userRoute)
+app.use('/api',hotelRoute)
