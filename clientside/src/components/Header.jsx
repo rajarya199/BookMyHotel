@@ -1,8 +1,10 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link ,useNavigate} from 'react-router-dom';
+import { signout,isAuthenticated } from '../auth';
 const Header = () => {
+  const{user}=isAuthenticated()
+  const navigate=useNavigate()
   return (
     <>
          <header className="flex  p-4 justify-between bg-slate-100 " >
@@ -31,17 +33,62 @@ const Header = () => {
 </svg>
 </button>
           </div>
-          <Link className="flex border items-center border-gray-400 rounded-full gap-3 px-4 py-2 shadow-sm shadow-grey-50" to='/login'>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-</svg>
-<div className="bg-gray-500 text-white rounded-full border border-gray-500 overflow-hidden">
+          <div className="flex border items-center border-gray-400 rounded-full gap-3 px-4 py-2 shadow-sm shadow-grey-50" >
+            {isAuthenticated() && isAuthenticated().user.role===0 &&
+            <div className='flex'>
+                
+               <Link className="bg-gray-500 text-white rounded-full border border-gray-500 overflow-hidden" to='/profile'>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 relative top-1">
+            <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
+          </svg> 
+       </Link>  
+         <div> 
+          &nbsp;{user.name}
+        </div> 
+            
+            </div>
+          
+            
+            }
+             {isAuthenticated() && isAuthenticated().user.role===1 &&
+             <div className='flex'>
+                
+             <Link className="bg-gray-500 text-white rounded-full border border-gray-500 overflow-hidden" to='/admin/dashboard'>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 relative top-1">
+          <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
+        </svg> 
+     </Link>  
+       <div> 
+        &nbsp;
+      Admin
+      </div> 
+          
+          </div>
+            }
+            { !isAuthenticated() && 
+              <div  className='flex'>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+  </svg>
+  <Link className="bg-gray-500 text-white rounded-full border border-gray-500 overflow-hidden mx-2" to='/signin '>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 relative top-1">
             <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
           </svg>
-        </div>
+        </Link>
+              </div>
+            }
+            {isAuthenticated() &&
+              <button className='bg-gray-300 rounded-full overflow-hidden px-1.5 py-1'
+              onClick={()=>signout(()=>{
+                navigate('/signin')
+                  })}
+            >Logout</button>
+            }
+          
+  
+
    
-          </Link>
+          </div>
          
       </header>
  

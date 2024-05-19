@@ -5,16 +5,31 @@ import Homepage from './pages/Homepage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import EmailVerify from './auth/EmailVerify';
+import NotFound from './pages/NotFound';
+import Profile from './pages/Profile';
+import ClientRoute from './auth/ClientRoute';
+import AdminRoute from './auth/AdminRoute';
+import AdminDash from './admin/AdminDash';
 const MyRoute = () => {
   return (
     <Router>
         <Routes>
             <Route path='/' element={<Layout/>}>
                 <Route index element={<Homepage/>}/>
-                <Route path='/login' element={<Login/>}/>
+                <Route path='/signin' element={<Login/>}/>
                 <Route path='/register' element={<Register/>}/>
                 <Route path='/email/confirmation/:token' element={<EmailVerify/>}/>
             </Route>
+            <Route path='/' element={<ClientRoute/>}>
+              <Route path='/profile' element={<Profile/>}/>
+
+            </Route>
+
+            <Route path="admin/" element={<AdminRoute/>}>
+                <Route path="dashboard" element={<AdminDash/>}/>
+            </Route>
+            <Route path='/*' element={<NotFound/>}/>
+
         </Routes>
     </Router>
   )
