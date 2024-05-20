@@ -1,7 +1,8 @@
 const Room=require('../models/roomModel')
 
 exports.postRoom=async(req,res)=>{
-    let roomImages = Array.isArray(req.files.room_image) ? req.files.room_image.map(file => file.path) : [req.file.path];
+    let roomImages = Array.isArray(req.files) ? req.files.map(file => file.path) : [];
+
     let room =new Room({
         room_title:req.body.room_title,
         room_number:req.body.room_number,
@@ -10,6 +11,7 @@ exports.postRoom=async(req,res)=>{
         room_description:req.body.room_description,
         room_facility:req.body.room_facility,
         room_image:roomImages,
+        hotel:req.body.hotel,
         maxguest:req.body.maxguest
     })
     room=await room.save()
