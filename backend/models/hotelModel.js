@@ -30,11 +30,7 @@ const hotelSchema=new mongoose.Schema({
         default:0,
         max:5 
     },
-    //1 hotel multiple room
-    rooms:[{
-        type:ObjectId,
-        ref:'Room',
-    }]
+   
 },{timestamps:true})
 
 module.exports=mongoose.model('Hotel',hotelSchema)

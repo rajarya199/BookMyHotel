@@ -1,4 +1,5 @@
  const Hotel=require('../models/hotelModel')
+ const Room=require('../models/roomModel')
 
  //to post hotel
  exports.postHotel=async(req,res)=>{
@@ -57,3 +58,25 @@
     })
  }
  
+
+ // to list all the room associate with a particular hotel
+
+ exports.listHotelRooms=async(req,res)=>{
+    try {
+        // Find the hotel by ID
+        const hotel = await Hotel.findById(req.params.hotelId);
+        if (!hotel) {
+            return res.status(404).json({ error: 'Hotel not found' });
+        }
+
+        // Find all rooms associated with the hotel
+        const rooms = await Room.find({ hotel: req.params.hotelId });
+        if (!rooms) {
+            return res.status(404).json({ error: 'No rooms found for this hotel' });
+        }
+        res.send({hotel,rooms})
+        // res.status(200).json({ hotel, rooms });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+ }
