@@ -18,10 +18,11 @@ const hotelSchema=new mongoose.Schema({
         type: String,
         required: true
     },
-    htl_image:{
+    htl_image:[{
         type: String,
         required: true
-    },
+    }  
+    ],
     htl_amenities: [{
         type: String
       }],

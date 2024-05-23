@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import ClientRoute from './auth/ClientRoute';
 import AdminRoute from './auth/AdminRoute';
 import AdminDash from './admin/AdminDash';
+import AddHotel from './admin/AddHotel';
 const MyRoute = () => {
   return (
     <Router>
@@ -27,6 +28,7 @@ const MyRoute = () => {
 
             <Route path="admin/" element={<AdminRoute/>}>
                 <Route path="dashboard" element={<AdminDash/>}/>
+                <Route path='addhotel' element={<AddHotel/>}/>
             </Route>
             <Route path='/*' element={<NotFound/>}/>
 

@@ -25,6 +25,24 @@ exports.passwordValidation=[
     .isLength({min:8}).withMessage('password must be minium of 8 character')
 ]
 
+exports.hotelValidation=[
+    check('htl_name','hotel name is required').notEmpty()
+    .isLength({ min: 3 })
+    .withMessage('Hotel name must be at least 3 characters long'),
+    check('htl_city','city id required').notEmpty(),
+    check('htl_location','address id required').notEmpty(),
+    check('htl_description','Description is required')
+    .notEmpty()
+    .isLength({ min: 10 })
+    .withMessage('Description must be at least 10 characters long'),
+    // check('htl_image','hotel image is required').notEmpty(),
+    //  check('htl_amenities','At least one amenity is required')
+    // .isArray({ min: 1 })
+    
+  
+]
+
+
 //next middleware -if correct then push to next,coming fn 
 exports.validation=(req,res,next)=>{
     const errors=validationResult(req)
