@@ -28,7 +28,7 @@ const AdminSidebar = () => {
                 <li><Link to="#" className="text-decoration-none text-white">Orders</Link></li>
                 <li><Link to="/" className="text-decoration-none text-white">Go to Homepage</Link></li>
                 <li><Link to="/admin/addhotel" className="text-decoration-none text-white">Add Hotel</Link></li>
-                <li><Link to="/admin/addproduct" className="text-decoration-none text-white">Add Product</Link></li>
+                <li><Link to="/admin/addroom" className="text-decoration-none text-white">Add Room</Link></li>
               </ul>
             </div>
             <div className="offcanvas-body">

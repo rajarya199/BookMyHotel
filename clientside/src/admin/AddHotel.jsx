@@ -82,7 +82,7 @@ const handleSubmit=async event=>{
     formData.append('htl_city',htldata.htl_city)
     formData.append('htl_location',htldata.htl_location)
     formData.append('htl_description',htldata.htl_description)
-    formData.append('htl_amenities',JSON.stringify(htldata.htl_amenities))
+    formData.append('htl_amenities',JSON.stringify(htl_amenities))
     // formData.append('htl_image',htldata.htl_image)
     htldata.htl_image.forEach(image => {
       formData.append('htl_image',image);

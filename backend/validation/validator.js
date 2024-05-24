@@ -38,10 +38,44 @@ exports.hotelValidation=[
     // check('htl_image','hotel image is required').notEmpty(),
     //  check('htl_amenities','At least one amenity is required')
     // .isArray({ min: 1 })
-    
-  
 ]
+exports.roomvalidation=[
+    check('room_title','Room title is required').notEmpty()
+    .isLength({ min: 3 })
+    .withMessage('Room name must be at least 3 characters long'),
 
+    check('room_number', "Room number is required")
+    .notEmpty()
+    .isInt({ min: 1 })
+    .withMessage('Room number must be a positive integer'),
+
+  check('room_type', 'Room type is required')
+    .notEmpty()
+    .isIn(['single', 'double', 'deluxe', 'standard', 'suite', 'family', 'classic'])
+    .withMessage('Room type must be one of single, double, deluxe, standard, suite, family, classic'),
+
+  check('room_price', "Room price is required")
+    .notEmpty()
+    .isFloat({ min: 0 })
+    .withMessage('Room price must be a positive number'),
+
+  check('room_description', "Room description is required")
+    .notEmpty()
+    .isLength({ min: 10 })
+    .withMessage('Room description must be at least 10 characters long'),
+
+  check('hotel', "Hotel is required")
+    .notEmpty()
+    .isMongoId()
+    .withMessage('Hotel must be a valid ID'),
+
+  check('room_facility', "Room facility is required").notEmpty(),
+ 
+   check('maxguest', "Max guest is required")
+    .notEmpty()
+    .isInt({ min: 1 })
+    .withMessage('Max guest must be a positive integer')
+]
 
 //next middleware -if correct then push to next,coming fn 
 exports.validation=(req,res,next)=>{

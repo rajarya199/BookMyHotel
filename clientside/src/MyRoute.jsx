@@ -11,6 +11,7 @@ import ClientRoute from './auth/ClientRoute';
 import AdminRoute from './auth/AdminRoute';
 import AdminDash from './admin/AdminDash';
 import AddHotel from './admin/AddHotel';
+import AddRoom from './admin/AddRoom';
 const MyRoute = () => {
   return (
     <Router>
@@ -28,6 +29,7 @@ const MyRoute = () => {
 
             <Route path="admin/" element={<AdminRoute/>}>
                 <Route path="dashboard" element={<AdminDash/>}/>
+                <Route path='addroom' element={<AddRoom/>}/>
                 <Route path='addhotel' element={<AddHotel/>}/>
             </Route>
             <Route path='/*' element={<NotFound/>}/>

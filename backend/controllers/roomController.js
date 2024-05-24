@@ -1,7 +1,7 @@
 const Room=require('../models/roomModel')
 
 exports.postRoom=async(req,res)=>{
-    let roomImages = Array.isArray(req.files) ? req.files.map(file => file.path) : [];
+    // let roomImages = Array.isArray(req.files) ? req.files.map(file => file.path) : [];
 
     let room =new Room({
         room_title:req.body.room_title,
@@ -9,8 +9,10 @@ exports.postRoom=async(req,res)=>{
         room_type:req.body.room_type,
         room_price:req.body.room_price,
         room_description:req.body.room_description,
-        room_facility:req.body.room_facility,
-        room_image:roomImages,
+        room_facility: JSON.parse(req.body.room_facility),
+        
+        room_image: req.files.map(file => file.path), 
+
         hotel:req.body.hotel,
         maxguest:req.body.maxguest
     })
