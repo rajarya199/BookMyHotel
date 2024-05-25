@@ -2,6 +2,8 @@
 import React from 'react';
 import { Link ,useNavigate} from 'react-router-dom';
 import { signout,isAuthenticated } from '../auth';
+import { RiHotelBedFill } from "react-icons/ri";
+
 const Header = () => {
   const{user}=isAuthenticated()
   const navigate=useNavigate()
@@ -10,11 +12,12 @@ const Header = () => {
          <header className="flex  p-4 justify-between bg-slate-100 " >
           <div className='flex items-center gap-2'>
           <Link to={'/'} className='logo flex items-center gap-1'>
-          <img src='' alt=" " className="w-9 h-9 " /> 
-          <span className="font-bold text-xl">Your stay</span>
+          <RiHotelBedFill className='w-6 h-6'/>
+          <span className="font-bold text-xl">BookMyHotel</span>
           </Link>
-          <Link className='p-2'>   <span className="text-l">About us</span>
-</Link>
+          <Link className='p-2' to='/hotel'><span className="text-lg">Hotels</span></Link>
+          <Link className='p-2'><span className="text-lg">Rooms</span></Link>
+
           </div>
         
 

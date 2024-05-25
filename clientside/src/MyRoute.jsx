@@ -12,6 +12,7 @@ import AdminRoute from './auth/AdminRoute';
 import AdminDash from './admin/AdminDash';
 import AddHotel from './admin/AddHotel';
 import AddRoom from './admin/AddRoom';
+import Hotel from './pages/Hotel';
 const MyRoute = () => {
   return (
     <Router>
@@ -21,6 +22,8 @@ const MyRoute = () => {
                 <Route path='/signin' element={<Login/>}/>
                 <Route path='/register' element={<Register/>}/>
                 <Route path='/email/confirmation/:token' element={<EmailVerify/>}/>
+                <Route path='/hotel' element={<Hotel/>}/>
+
             </Route>
             <Route path='/' element={<ClientRoute/>}>
               <Route path='/profile' element={<Profile/>}/>
