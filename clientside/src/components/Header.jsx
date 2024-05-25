@@ -16,7 +16,7 @@ const Header = () => {
           <span className="font-bold text-xl">BookMyHotel</span>
           </Link>
           <Link className='p-2' to='/hotel'><span className="text-lg">Hotels</span></Link>
-          <Link className='p-2'><span className="text-lg">Rooms</span></Link>
+          <Link className='p-2' to='/room'><span className="text-lg">Rooms</span></Link>
 
           </div>
         

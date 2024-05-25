@@ -17,8 +17,8 @@ const HotelCard = (props) => {
           />
           <div className="p-2">
             <h5 className="text-xl font-semibold mb-1">{htl_name}</h5>
-            <h5 className="text-gray-600 "> {htl_city} </h5>
-            <h5 className="text-gray-600 mb-2">{htl_location} </h5>
+            <h5 className="text-gray-600 text-lg  "> {htl_city} </h5>
+            <h5 className="text-gray-600  text-lg mb-2">{htl_location} </h5>
 
             <Link className="inline-block bg-blue-500 text-white px-4 py-1.5  rounded hover:bg-blue-600 transition duration-300">
               View Details
