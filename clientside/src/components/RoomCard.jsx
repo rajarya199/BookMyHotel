@@ -19,7 +19,7 @@ const RoomCard = (props) => {
         <p className="text-gray-600 text-lg  mb-2">{ hotel && hotel.htl_name}</p>
 
         <Link 
-          to=''
+          to={`/roomdetails/${_id}`}
           className="inline-block bg-blue-500 text-white px-4 py-1.5 rounded hover:bg-blue-600 transition duration-300"
         >
           View Details

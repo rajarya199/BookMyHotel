@@ -11,7 +11,7 @@
         // htl_image:req.files.path ,
         htl_image: req.files.map(file => file.path), // Assuming multer has stored the file paths in 'path' property
         htl_amenities: JSON.parse(req.body.htl_amenities) ,
-        rooms:req.body.rooms
+        
     })
 
 
@@ -34,7 +34,6 @@
  //hotel details
  exports.hotelDetails=async(req,res)=>{
     const hotel= await Hotel.findById(req.params.id)
-    .populate('rooms')
     if(!hotel){
         return res.status(400).json({error:"something went wrong"})
     }
@@ -65,13 +64,14 @@
  exports.listHotelRooms=async(req,res)=>{
     try {
         // Find the hotel by ID
-        const hotel = await Hotel.findById(req.params.hotelId);
+        const hotel = await Hotel.findById(req.params.id);
         if (!hotel) {
             return res.status(404).json({ error: 'Hotel not found' });
         }
 
         // Find all rooms associated with the hotel
-        const rooms = await Room.find({ hotel: req.params.hotelId });
+        const rooms = await Room.find({ hotel: req.params.id })
+        .populate('hotel','htl_name htl_city htl_location')
         if (!rooms) {
             return res.status(404).json({ error: 'No rooms found for this hotel' });
         }

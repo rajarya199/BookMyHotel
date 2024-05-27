@@ -26,7 +26,7 @@ const storage=multer.diskStorage({
 })
 
 let imageFilter=(req,file,cb)=>{
-    if(!file.originalname.match(/\.(jpg|png|jpeg|svg|jfif|gif|JPG|PNG|JPEG|SVG|JFIF|GIF)$/)){
+    if(!file.originalname.match(/\.(jpg|png|jpeg|avif|svg|jfif|gif|JPG|PNG|JPEG|SVG|JFIF|GIF)$/)){
         return cb(new Error('You can upload image file only'),false)
     }
     else{

@@ -34,6 +34,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import ImgSlider from '../components/ImgSlider';
 
 const Homepage = () => {
   const SampleNextArrow = (props) => {
@@ -124,6 +125,7 @@ const Homepage = () => {
           </div>
         </div>
       </Slider>
+      
     </div>
   );
 }
