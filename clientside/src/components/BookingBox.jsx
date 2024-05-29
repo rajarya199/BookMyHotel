@@ -45,8 +45,15 @@ const handleSubmit=async (e)=>{
       });
       console.log('Booking successful!', response.data);
       alert('Booking successful!');
+      setValues({
+        checkinDate:'',
+  checkoutDate:'',
+  guestNum:'',
+
+      })
       const bookingId=response.data._id;
       setRedirect(`/confirmbooking/${bookingId}`)
+
     } catch (error) {
       console.error('Error creating booking:', error);
       alert('Failed to create booking. Please try again.');

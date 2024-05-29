@@ -58,7 +58,7 @@ exports.bookingDetails=async(req,res)=>{
 exports.updateBookStatus=async(req,res)=>{
     const booking=await Booking.findByIdAndUpdate( req.params.id,
         {
-            booking_status:req.body.status 
+            booking_status:req.body.booking_status 
         },
         {new:true}
     )

@@ -18,11 +18,32 @@ const ConfirmBooking = () => {
     },[params.bookingId])
 
     const imageUrl = booking.room &&  booking.room.room_image &&  booking.room.room_image.length > 0 ? `${IMG_URL}/${ booking.room.room_image[0]}` : 'a';
-
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString();
   };
+  const handleSubmit=async(e)=>{
+    e.preventDefault()
+
+    try{
+        const id=params.bookingId
+        const config={
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+              }
+        }
+        const booking_status='booked'
+        await axios.put(`${API}/updatebookingstatus/${id}`,{booking_status},config)
+        setBooking((prev) => ({ ...prev, booking_status }));
+
+    }
+
+    catch(error){
+        console.log(error)
+
+    }
+  }
   return (
     <> 
         <div className=' mt-2 mb-5 p-4 bg-gray-100'>
@@ -53,7 +74,9 @@ const ConfirmBooking = () => {
             <p className="text-gray-600 text-lg p-1"><strong className='font-serif '>Status</strong>:&nbsp;{booking. booking_status}</p>
 
             <div>
-                <button  className="inline-block mt-2 mb-2 bg-green-600 text-white px-4 py-2.5 rounded hover:bg-green-500 transition duration-300">
+                <button  className="inline-block mt-2 mb-2 bg-green-600 text-white px-4 py-2.5 rounded hover:bg-green-500 transition duration-300"
+                onClick={handleSubmit}
+                >
                     Confirm Booking
                 </button>
             </div>
