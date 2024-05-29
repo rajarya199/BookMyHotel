@@ -1,42 +1,24 @@
-// import React from 'react'
-
-// const Homepage = () => {
-//   return (
-//     <>
-
-
-// <div className="container-fluid mt-5 mb-5">
-//   <div className="row row-cols-1 row-cols-md-3 g-4">
-//     <div className="col">
-//     <div className="relative w-96 h-72 overflow-hidden rounded-xl shadow-lg">
-//       <img
-//                     src="https://www.travelsewa.com/storage/images/kathmandu-20200105102416.jpg"
-
-// alt="Background"
-//         className="w-full h-full object-cover"
-//       />
-//       <div className="absolute inset-0 bg-opacity-60 flex flex-col justify-center items-center p-5 text-center text-white">
-//         <h1 className="text-2xl mt-5 font-bold">kathmandu</h1>
-//         <p className="mt-3 text-lg"> 10 Hotels</p>
-//       </div>
-//     </div>
-//     </div>    
-//   </div>
-// </div>
-
-//     </>
-//   )
-// }
-
-// export default Homepage
 
 import React from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import ImgSlider from '../components/ImgSlider';
-
+import {useState,useEffect} from 'react'
+import axios from 'axios'
+import { API } from '../config'
+import RoomCard from '../components/RoomCard'
 const Homepage = () => {
+
+const[rooms,setRooms]=useState([])
+useEffect(()=>{
+  axios.get( `${API}/roomlist` )
+  .then(res=>{
+      setRooms(res.data)
+  })
+  .catch(err=>console.log(err))
+},[])
+
   const SampleNextArrow = (props) => {
     const { className, style, onClick } = props;
     return (
@@ -70,7 +52,7 @@ const Homepage = () => {
 
   return (
     <div className="container mt-5 mb-5">
-      <span className='text-2xl p-2'>Hotel in Popualar Cities of Nepal</span>
+      <span className='text-2xl p-2'>Hotel in Popular Cities of Nepal</span>
       <Slider {...settings}>
         <div className="p-2">
           <div className="relative w-96 h-72 overflow-hidden rounded-xl shadow-lg">
@@ -125,6 +107,14 @@ const Homepage = () => {
           </div>
         </div>
       </Slider>
+      <div className='mt-5 mb-5 '>
+      <span className='text-2xl p-2 '> Rooms For You </span>
+      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {rooms && rooms.map((room, i) => (
+          <RoomCard key={i} data={room} />
+        ))}
+      </div>
+      </div>
       
     </div>
   );
