@@ -5,6 +5,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { IMG_URL,API } from '../config'
 import ImgSlider from '../components/ImgSlider'
+import BookingBox from '../components/BookingBox'
 const RoomDetail = () => {
     const[room,setRoom]=useState({})
     const params=useParams()
@@ -31,35 +32,8 @@ const RoomDetail = () => {
                   )}
         </div> 
         <div className="mt-5 mb-5 ">
-                  <div className='p-3 bg-white shadow rounded-2xl '>
-                    <div className='text-2xl text-center'>
-                    Price:Rs {room.room_price}/per night
-                    </div>
-                    <div className="border rounded-2xl mt-4">
-                        <div className="flex">
-                        <div className=' px-3 py-3' >
-                    <label > Check in:</label>
-                    <input   type="date" />
-                  </div>
-                  <div className='p-3 border-l' >
-                    <label  > Check out:</label>
-                    <input   type="date" />
-                  </div>
-                        </div>
-                        <div className="py-3 px-3 border-t">
-                            <label > Number of Guest :</label>
-                            <input type="number" step={1} min={1} />
-                        </div>
-                  
-                    </div>
-                  
-                  <button  className=" mt-4 inline-block bg-blue-500 text-white ml-3 px-4 py-2 rounded hover:bg-blue-600 transition duration-300"
-> Book Room</button>
 
-                  </div>
-               
-
-                 
+                <BookingBox data={room}/>
         </div>
                 </div>
                 <div className="grid mt-2 gap-2 grid-cols-1 lg:grid-cols-2">
@@ -83,8 +57,8 @@ const RoomDetail = () => {
    <div className='mt-2 mb-5'>
                 <h2 className="font-semibold text-2xl">Amenities Provided by hotels</h2>
                 <div className="grid mt-2 gap-2 grid-cols-1 md:grid-cols-3 lg:grid-cols-5 sm:grid-cols-2">
-                  {room.room_facility && room.room_facility.map((facility)=>(
-                    <div>
+                  {room.room_facility && room.room_facility.map((facility,index)=>(
+                    <div key={index}>
                       {facility}
                     </div>
         

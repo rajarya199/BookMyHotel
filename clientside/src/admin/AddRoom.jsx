@@ -204,7 +204,7 @@ const showSuccess=()=>(
               </div>
               <div className="mb-2">
                 <label htmlFor="rdesc">Room Description</label>
-                <p className="text-gray-500 text-sm">Describe your Hotel</p>
+                <p className="text-gray-500 text-sm">Describe your Room</p>
                 <textarea
                   type="text"
                   id="rdesc"

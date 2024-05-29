@@ -16,6 +16,7 @@ import Hotel from './pages/Hotel';
 import Room from './pages/Room';
 import HotelDetail from './pages/HotelDetail';
 import RoomDetail from './pages/RoomDetail';
+import ConfirmBooking from './pages/ConfirmBooking';
 const MyRoute = () => {
   return (
     <Router>
@@ -29,6 +30,7 @@ const MyRoute = () => {
                 <Route path='/room' element={<Room/>}/>
                 <Route path='hoteldetails/:hotelId' element={<HotelDetail/>}/>
                 <Route path='roomdetails/:roomId' element={<RoomDetail/>}/>
+                <Route path='/confirmbooking/:bookingId' element={<ConfirmBooking/>}/>
             </Route>
             <Route path='/' element={<ClientRoute/>}>
               <Route path='/profile' element={<Profile/>}/>

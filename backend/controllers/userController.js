@@ -135,8 +135,8 @@ exports.signIn=async(req,res)=>{
       //store token in the cookie
       res.cookie("mycookie", token, { expire: Date.now()+ 99999 });
        //return user information to frontend
-    const { _id, name, role } = user;
-    return res.json({ token, user: { name, role, email, _id } });
+    const { _id, name, role,phone } = user;
+    return res.json({ token, user: { name, role, email, _id,phone } });
     //to acess name--> .user.name
     
   }

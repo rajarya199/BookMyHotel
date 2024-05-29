@@ -9,7 +9,7 @@ const bodyParser=require('body-parser')
 const userRoute=require('./routes/userRoute')
 const hotelRoute=require('./routes/hotelRoute')
 const roomRoute=require('./routes/roomRoute')
-
+const bookingRoute=require('./routes/bookingRoute')
 
 
 //middleware
@@ -28,6 +28,7 @@ app.listen( port, ()=>{
 app.use('/api',userRoute)
 app.use('/api',hotelRoute)
 app.use('/api',roomRoute)
+app.use('/api',bookingRoute)
 
 // to access image of public
 app.use('/public/uploadhotel',express.static('public/uploadhotel'))

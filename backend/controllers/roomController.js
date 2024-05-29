@@ -35,7 +35,7 @@ exports.roomList=async(req,res)=>{
 
 exports.roomDetails=async(req,res)=>{
     const room =await Room.findById(req.params.id)
-    .populate('hotel','htl_name htl_city htl_location')
+    .populate('hotel')
     if(!room){
         return res.status(400).json({error:'something went wrong'}) 
     }

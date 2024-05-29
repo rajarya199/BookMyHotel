@@ -18,7 +18,6 @@ const Login = () => {
 const handleSubmit=e=>{
   e.preventDefault()
   setValues({...values,error:false})
-  
   signin({email,password})
   .then(data=>{
     if(data.error){
