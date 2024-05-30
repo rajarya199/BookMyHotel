@@ -25,7 +25,7 @@ const AdminSidebar = () => {
                 <li><Link to="/admin/users" className="text-decoration-none text-white"> Manage Users</Link></li>
                 <li><Link to="/admin/rooms" className="text-decoration-none text-white">Rooms </Link></li>
                 <li><Link to="/admin/hotels" className="text-decoration-none text-white">Hotels</Link></li>
-                <li><Link to="#" className="text-decoration-none text-white">Booking</Link></li>
+                <li><Link to="/admin/bookings" className="text-decoration-none text-white">Booking</Link></li>
                 <li><Link to="/" className="text-decoration-none text-white">Go to Homepage</Link></li>
                 <li><Link to="/admin/addhotel" className="text-decoration-none text-white">Add Hotel</Link></li>
                 <li><Link to="/admin/addroom" className="text-decoration-none text-white">Add Room</Link></li>

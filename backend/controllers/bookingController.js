@@ -34,7 +34,7 @@ const {hotel,room,user,checkin_date,checkout_date,guest_num}=req.body
 exports.bookingList=async(req,res)=>{
     const booking=await Booking.find()
     .populate('user','name phone email')
-    .populate('room','room_price room_type room_title maxguest room_image room_avilable')
+    .populate('room','room_price room_type room_title maxguest room_image room_avilable room_number')
     .populate('hotel','htl_name htl_location htl_city')
     .sort({createdAt:-1})
     if(!booking){

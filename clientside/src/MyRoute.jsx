@@ -20,6 +20,7 @@ import ConfirmBooking from './pages/ConfirmBooking';
 import Users from './admin/Users';
 import ManageHotel from './admin/ManageHotel';
 import ManageRoom from './admin/ManageRoom';
+import ManageBooking from './admin/ManageBooking';
 const MyRoute = () => {
   return (
     <Router>
@@ -47,6 +48,7 @@ const MyRoute = () => {
                 <Route path='users' element={<Users/>}/>
                 <Route path='hotels' element={<ManageHotel/>}/>
                 <Route path='rooms' element={<ManageRoom/>}/>
+                <Route path='bookings' element={<ManageBooking/>}/>
             </Route>
             <Route path='/*' element={<NotFound/>}/>
 
