@@ -13,8 +13,8 @@ const AdminDash = () => {
             <ul className="flex space-x-4">
               <li><Link to="/admin/bookings" className=" text-black hover:underline">Manage Bookings</Link></li>
               <li><Link to="/admin/rooms" className=" text-black hover:underline">Manage Rooms</Link></li>
+              <li><Link to="/admin/hotels" className=" text-black hover:underline">Manage Hotels</Link></li>
               <li><Link to="/admin/users" className="  text-black hover:underline">Manage Users</Link></li>
-              <li><Link to="/admin/reports" className=" text-black hover:underline">View Reports</Link></li>
               <li><Link to="/signout" className="  text-black hover:underline">Sign Out</Link></li>
             </ul>
           </nav>

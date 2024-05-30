@@ -18,6 +18,8 @@ import HotelDetail from './pages/HotelDetail';
 import RoomDetail from './pages/RoomDetail';
 import ConfirmBooking from './pages/ConfirmBooking';
 import Users from './admin/Users';
+import ManageHotel from './admin/ManageHotel';
+import ManageRoom from './admin/ManageRoom';
 const MyRoute = () => {
   return (
     <Router>
@@ -43,6 +45,8 @@ const MyRoute = () => {
                 <Route path='addroom' element={<AddRoom/>}/>
                 <Route path='addhotel' element={<AddHotel/>}/>
                 <Route path='users' element={<Users/>}/>
+                <Route path='hotels' element={<ManageHotel/>}/>
+                <Route path='rooms' element={<ManageRoom/>}/>
             </Route>
             <Route path='/*' element={<NotFound/>}/>
 
