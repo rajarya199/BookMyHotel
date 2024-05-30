@@ -199,3 +199,14 @@ exports.requireUser=(req,res,next)=>{
       }
      })
   }
+
+  //user list
+  exports.userList=async(req,res)=>{
+    const user=await User.find()
+    .select('-hashed_password') // - to hide password
+    .select('-salt') //to hide salt
+    if(!user){
+      return res.status(400).json({error:'something went wrong'})
+    }
+    res.send(user)
+  }

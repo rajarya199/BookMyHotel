@@ -17,6 +17,7 @@ import Room from './pages/Room';
 import HotelDetail from './pages/HotelDetail';
 import RoomDetail from './pages/RoomDetail';
 import ConfirmBooking from './pages/ConfirmBooking';
+import Users from './admin/Users';
 const MyRoute = () => {
   return (
     <Router>
@@ -41,6 +42,7 @@ const MyRoute = () => {
                 <Route path="dashboard" element={<AdminDash/>}/>
                 <Route path='addroom' element={<AddRoom/>}/>
                 <Route path='addhotel' element={<AddHotel/>}/>
+                <Route path='users' element={<Users/>}/>
             </Route>
             <Route path='/*' element={<NotFound/>}/>
 
