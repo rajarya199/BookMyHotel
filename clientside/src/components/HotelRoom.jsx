@@ -25,7 +25,7 @@ const HotelRoom = ({ data }) => {
         </div>
         <div>
           <Link 
-            to={`/rooms/${_id}`} // Assuming each room has a unique ID and you have a route to view room details
+            to={`/roomdetails/${_id}`} // Assuming each room has a unique ID and you have a route to view room details
             className="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300"
           >
             View Details
