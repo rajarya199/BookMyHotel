@@ -6,6 +6,11 @@ import { Link } from 'react-router-dom'
 import { IMG_URL,API } from '../config'
 import ImgSlider from '../components/ImgSlider'
 import BookingBox from '../components/BookingBox'
+
+import { CiWifiOn } from 'react-icons/ci';
+import { MdPool, MdPets, MdElectricBolt, MdOutlineBathroom, MdOutlineRoomService, MdBalcony } from 'react-icons/md';
+import { PiTelevisionSimpleFill } from 'react-icons/pi';
+import { BiCloset } from 'react-icons/bi';
 const RoomDetail = () => {
     const[room,setRoom]=useState({})
     const params=useParams()
@@ -17,6 +22,30 @@ const RoomDetail = () => {
         })
         .catch(err=>console.log(err))
     },[params.roomId])
+
+      // Function to get the corresponding icon for a facility
+  const getFacilityIcon = (facility) => {
+    switch (facility.toLowerCase()) {
+      case 'wifi':
+        return <CiWifiOn className="w-6 h-6" />;
+      case 'tv':
+        return <PiTelevisionSimpleFill className="w-6 h-6" />;
+      case 'attached bathroom':
+        return <MdOutlineBathroom className="w-6 h-6" />;
+      case 'room service':
+        return <MdOutlineRoomService className="w-6 h-6" />;
+      case 'pets':
+        return <MdPets className="w-6 h-6" />;
+      case 'power backup':
+        return <MdElectricBolt className="w-6 h-6" />;
+      case 'balcony':
+        return <MdBalcony className="w-6 h-6" />;
+      case 'closet':
+        return <BiCloset className="w-6 h-6" />;
+      default:
+        return <span> </span>;
+    }
+  };
   return (
     <>
             <div className="mt-4 mb-5 bg-gray-100 mx-8 px-8 py-8">
@@ -54,12 +83,13 @@ const RoomDetail = () => {
 
      </div>
    </div>
-   <div className='mt-2 mb-5'>
-                <h2 className="font-semibold text-2xl">Amenities Provided by hotels</h2>
-                <div className="grid mt-2 gap-2 grid-cols-1 md:grid-cols-3 lg:grid-cols-5 sm:grid-cols-2">
+   <div className='mt-4 mb-5'>
+                <h2 className="font-semibold text-2xl">Facilities </h2>
+                <div className="grid mt-4 gap-2 grid-cols-1 md:grid-cols-3 lg:grid-cols-5 sm:grid-cols-2">
                   {room.room_facility && room.room_facility.map((facility,index)=>(
-                    <div key={index}>
-                      {facility}
+                    <div key={index}  className="border p-3 flex rounded-2xl gap-2 items-center">
+                       {getFacilityIcon(facility)}
+                <span>{facility}</span>
                     </div>
         
                   ))}
