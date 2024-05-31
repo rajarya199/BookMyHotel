@@ -210,3 +210,57 @@ exports.requireUser=(req,res,next)=>{
     }
     res.send(user)
   }
+
+  //forget password
+  exports.forgetPassword=async(req,res)=>{
+    const user=await User.findOne({email:req.body.email})
+    if(!user){
+      return res.status(403).json({error:'sorry email you provide is not found in our system,register first and try another '}) 
+    }
+    let mytoken = new Token({
+      token: crypto.randomBytes(16).toString("hex"),
+      userId: user._id,
+    });
+    mytoken= await mytoken.save()
+    if(!mytoken){
+      return res.status(400).json({error:'failed to create token'})
+    }
+    const url=process.env.FRONTEND_URL+'\/resetpassword\/'+mytoken.token
+
+    sendEmail({
+      from: "no-reply@ecommerce.com",
+      to: user.email,
+      subject: "password reset link",
+      text: `hello ,\n\n please reset your password by clicking the link below:\n\n 
+      http:\/\/${req.headers.host}\/api\/resetpassword\/${mytoken.token}`,
+      //http://localhost:8000/api/resetpassword/12345
+      html:`
+      <h3> Hello User,</h3> <br/>
+      <h1> To Reset your Password,follow step</h1>
+      <button >  <a href=${url}> Click to Reset  </a> </button>
+      `
+    });
+    res.json({message:'password reset link has been sent successfully '})
+
+  }
+
+  //reset password
+  exports.resetPassword=async(req,res)=>{
+      //find the valid token
+  let mytoken= await Token.findOne({token:req.params.token})
+  if(!mytoken){
+    return res.status(400).json({error:'invalid token or token may have expired'})
+  }
+//find valid user for token
+  let user=await User.findOne({_id:mytoken.userId})
+  if(!user){
+    return res.status(400).json({error:'we are unable to find the valid user for this token '}) 
+  } 
+   //reset the password
+   user.password=req.body.password 
+   user=await user.save()
+   if(!user){
+    return res.status(500).json({error:"failed to reset password"})
+  }
+  res.json({message:'password has been reset successfully,login to continue'})
+  }

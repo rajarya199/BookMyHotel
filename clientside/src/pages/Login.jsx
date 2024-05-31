@@ -66,10 +66,18 @@ const handleSubmit=e=>{
 
         />
         <button className='primary p-2 w-full text-white rounded-2xl bg-slate-400' onClick={handleSubmit}>Login</button>
+
         <div className='text-center py-2 text-gray-500'>
-            Don't have an account yet? 
+            Don't have an account yet? &nbsp;
             <Link  className='underline text-black' to={'/register'}>
-         Register Now
+          Register Now
+        </Link>
+        
+
+        </div>
+        <div className='text-center  text-gray-500'>
+            <Link  className=' text-black' to={'/forgetpassword'}>
+                Forget  Your Password?
         </Link></div>
 
     </form>
