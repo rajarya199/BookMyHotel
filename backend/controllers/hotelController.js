@@ -9,7 +9,7 @@
         htl_location:req.body.htl_location ,
         htl_description:req.body.htl_description ,
         // htl_image:req.files.path ,
-        htl_image: req.files.map(file => file.path), // Assuming multer has stored the file paths in 'path' property
+        htl_image: req.files.map(file => file.path), // multer has stored the file paths in 'path' property
         htl_amenities: JSON.parse(req.body.htl_amenities) ,
         
     })
@@ -81,3 +81,25 @@
         res.status(500).json({ error: error.message });
     }
  }
+
+ //update hotels
+ exports.updateHotel=async(req,res)=>{
+    const hotel=await Hotel.findByIdAndUpdate(
+        req.params.id,
+        {
+            htl_name:req.body.htl_name,
+            htl_city:req.body.htl_city,
+            htl_location:req.body.htl_location ,
+            htl_description:req.body.htl_description ,
+            htl_image: req.files.map(file => file.path), 
+            htl_amenities: JSON.parse(req.body.htl_amenities) ,
+        },
+        {new:true}
+    )
+    if(!hotel){
+        return res.status(400).json({error:"something went wrong"})
+    }
+    res.send(hotel)
+    
+ }
+ 
