@@ -24,6 +24,7 @@ import ManageBooking from './admin/ManageBooking';
 import ForgetPassword from './pages/ForgetPassword';
 import ResetPassword from './pages/ResetPassword';
 import UpdateHotel from './admin/UpdateHotel';
+import UpdateRoom from './admin/UpdateRoom';
 const MyRoute = () => {
   return (
     <Router>
@@ -55,6 +56,7 @@ const MyRoute = () => {
                 <Route path='rooms' element={<ManageRoom/>}/>
                 <Route path='bookings' element={<ManageBooking/>}/>
                 <Route path='updatehotel/:hotelId' element={<UpdateHotel/>}/>
+                <Route path='updateroom/:roomId' element={<UpdateRoom/>}/>
             </Route>
             <Route path='/*' element={<NotFound/>}/>
 

@@ -56,3 +56,27 @@ exports.deleteRoom=(req,res)=>{
         return res.status(400).json({error:err})
     })
 }
+
+//update room
+exports.updateRoom=async(req,res)=>{
+    const room=await Room.findByIdAndUpdate(
+        req.params.id,{
+            room_title:req.body.room_title,
+            room_number:req.body.room_number,
+            room_type:req.body.room_type,
+            room_price:req.body.room_price,
+            room_description:req.body.room_description,
+            room_facility: JSON.parse(req.body.room_facility),
+            
+            room_image: req.files.map(file => file.path), 
+    
+            hotel:req.body.hotel,
+            maxguest:req.body.maxguest
+        },
+        {new:true}
+    )
+    if(!room){
+        return res.status(400).json({error:'something went wrong'}) 
+    }
+    res.send(room)
+}
