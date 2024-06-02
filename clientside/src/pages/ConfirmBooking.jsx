@@ -7,6 +7,7 @@ import { IMG_URL,API } from '../config'
 const ConfirmBooking = () => {
 
     const[booking,setBooking]=useState({})
+  
     const params=useParams()
     useEffect(()=>{
         const id=params.bookingId

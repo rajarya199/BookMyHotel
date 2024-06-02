@@ -71,8 +71,8 @@ exports.updateBookStatus=async(req,res)=>{
 
 
 exports.userBooking=async(req,res)=>{
-    const userBookingList=await Booking.find({user:req.params.userId})
-    .populate('room hotel')
+    const userBookingList=await Booking.find({user:req.params.id})
+    .populate('room hotel user')
     .sort({createdAt:-1})
     if(!userBookingList){
         return res.status(400).json({error:'something went wrong'})  
