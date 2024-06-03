@@ -1,9 +1,9 @@
 
 import React from 'react'
 import { API } from '../config';
-import { useState } from 'react'
+import { useState ,useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { isAuthenticated} from '../auth'
 
@@ -19,12 +19,48 @@ const[redirect,setRedirect]=useState('')
  })
  
 const{checkinDate,checkoutDate,guestNum}=values
+const [totalPrice, setTotalPrice] = useState(0);
+const [error, setError] = useState('');
+useEffect(() => {
+  if (checkinDate && checkoutDate) {
+    const checkin = new Date(checkinDate);
+    const checkout = new Date(checkoutDate);
+    if (checkout > checkin) {
+      const timeDiff = checkout - checkin;
+      const daysDiff = timeDiff / (1000 * 3600 * 24);
+      const calculatedTotalPrice = daysDiff * room_price;
+      setTotalPrice(calculatedTotalPrice);
+      setError(''); 
+    } else {
+      setTotalPrice(0);
+      setError('Checkout date must be later than check-in date.');
+    }
+  } else{
+    setTotalPrice(0);
+      setError('');
+  }
+}, [checkinDate, checkoutDate, room_price]);
+
 const handleChange=mydata=>event=>{
   setValues({...values,[mydata]:event.target.value})
 }
 
 const handleSubmit=async (e)=>{
   e.preventDefault()
+  if (!checkinDate || !checkoutDate) {
+    alert('Please select both check-in and check-out dates.');
+    return;
+  }
+
+  if (new Date(checkoutDate) <= new Date(checkinDate)) {
+    alert('Checkout date must be later than check-in date.');
+    return;
+  }
+
+  if (totalPrice <= 0) {
+    alert('Total price must be a positive value.');
+    return;
+  }
   const userId=user._id
   const hotelId=hotel._id
  const bookingData={
@@ -95,10 +131,31 @@ const handleSubmit=async (e)=>{
                         </div>
                   
                     </div>
-                  
-                  <button  className=" mt-4 inline-block bg-blue-500 text-white ml-3 px-4 py-2 rounded hover:bg-blue-600 transition duration-300"
-                  onClick={handleSubmit}
-> Book Room</button>
+                    {checkinDate && checkoutDate && (
+            <div className='text-xl text-center mt-4'>
+              Total Price: Rs {totalPrice}
+            </div>
+          )}
+             {error && (
+            <div className='text-red-500 text-center mt-4'>
+              {error}
+            </div>
+          )}
+                  {
+                    isAuthenticated() && isAuthenticated().user.role===0 &&
+                    <button  className=" mt-4 inline-block bg-blue-500 text-white ml-3 px-4 py-2 rounded hover:bg-blue-600 transition duration-300"
+                    onClick={handleSubmit}
+  > Book Room</button>
+                  }
+                         {
+                          !isAuthenticated() &&
+                          <Link  to='/signin' className='mt-4  inline-block bg-blue-500 text-white ml-3 px-4 py-2 rounded hover:bg-blue-600 transition duration-300'>Book Room</Link>
+                         }
+
+                          {
+                          isAuthenticated() && isAuthenticated().user.role===1 &&
+                          <Link  to='/signin' className='mt-4  inline-block bg-blue-500 text-white ml-3 px-4 py-2 rounded hover:bg-blue-600 transition duration-300'>Book Room</Link>
+                         }
                   </div>
     </>
   )

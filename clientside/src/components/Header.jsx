@@ -20,8 +20,25 @@ const Header = () => {
 
           </div>
         
+          <div className="relative w-80 ">
+          <input 
+            type="text" 
+            placeholder="" 
+            className=" w-full pl-10 pr-12 py-2 border  border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            strokeWidth={1.5} 
+            stroke="currentColor" 
+            className="w-6 h-6 absolute  right-2  top-1/2 transform -translate-y-1/2 text-gray-400"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+        </div>
 
-          <div className="flex border border-gray-300 rounded-full gap-3 px-4 py-2 shadow-md shadow-grey-300">
+          {/* <div className="flex border border-gray-300 rounded-full gap-3 px-4 py-2 shadow-md shadow-grey-300">
           <div>Anywhere</div>
           <div className="border-l border-grey-300 "></div>
           <div> Any times </div>
@@ -35,7 +52,7 @@ const Header = () => {
   <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
 </svg>
 </button>
-          </div>
+          </div> */}
           <div className="flex border items-center border-gray-400 rounded-full gap-3 px-4 py-2 shadow-sm shadow-grey-50" >
             {isAuthenticated() && isAuthenticated().user.role===0 &&
             <div className='flex'>
